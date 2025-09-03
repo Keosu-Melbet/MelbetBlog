@@ -1,10 +1,20 @@
-import type { Express } from "express";
+import type { Express, Request } from "express";
+import express from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPostSchema } from "@shared/schema";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+
+// Extend Request interface to include file property from multer
+declare global {
+  namespace Express {
+    interface Request {
+      file?: Express.Multer.File;
+    }
+  }
+}
 
 // Configure multer for file uploads
 const uploadDir = path.resolve(import.meta.dirname, "..", "client", "uploads");
@@ -26,7 +36,7 @@ const upload = multer({
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
     } else {
-      cb(new Error('Only image files are allowed!'), false);
+      cb(null, false);
     }
   },
   limits: {
@@ -39,7 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use('/uploads', (req, res, next) => {
     res.setHeader('Cache-Control', 'public, max-age=31536000');
     next();
-  }, require('express').static(uploadDir));
+  }, express.static(uploadDir));
 
   // Get all published posts for homepage
   app.get("/api/posts", async (req, res) => {
