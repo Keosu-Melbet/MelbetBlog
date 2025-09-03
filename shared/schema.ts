@@ -13,8 +13,8 @@ export const posts = pgTable("posts", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   title: text("title").notNull(),
   content: text("content").notNull(),
-  imageUrl: text("image_url"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+  imageUrl: text("imageUrl"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
   published: boolean("published").notNull().default(false),
 });
 
