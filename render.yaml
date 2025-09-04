@@ -1,12 +1,7 @@
 services:
   - type: web
-    name: melbetblog-web
+    name: your-app-name
     env: node
-    buildCommand: |
-      npm install
-      npm run build
-    startCommand: npm start
-    autoDeploy: true
-    envVars:
-      - key: NODE_ENV
-        value: production
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    rootDir: .
