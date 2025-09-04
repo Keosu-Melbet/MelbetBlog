@@ -89,6 +89,7 @@
     "tsx": "^4.19.1",
     "typescript": "5.6.3",
     "esbuild": "^0.25.0"
+    "esbuild-linux-64": "^0.18.19"
   },
   "devDependencies": {
     "@replit/vite-plugin-cartographer": "^0.3.0",
