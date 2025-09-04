@@ -2,8 +2,5 @@ services:
   - type: web
     name: melbetblog-web
     env: node
-    buildCommand: |
-      npm install
-      npx prisma db push
-      npm run build
-    startCommand: npm start
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
