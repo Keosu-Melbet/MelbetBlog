@@ -1,0 +1,747 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog CMS - Melbet Inspired Design</title>
+    <meta name="description" content="Modern blog content management system with Melbet-inspired design">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                    'brand-yellow': '#FFD700',
+                    'brand-black': '#0A0A0A',
+                    'brand-green': '#4CAF50',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                }
+            },
+        }
+    };
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --background: hsl(0 0% 4%);
+            --foreground: hsl(0 0% 98%);
+            --card: hsl(0 0% 10%);
+            --card-foreground: hsl(0 0% 98%);
+            --primary: hsl(51 100% 50%);
+            --primary-foreground: hsl(0 0% 4%);
+            --secondary: hsl(122 39% 49%);
+            --secondary-foreground: hsl(0 0% 98%);
+            --muted: hsl(0 0% 16%);
+            --muted-foreground: hsl(0 0% 65%);
+            --accent: hsl(122 39% 49%);
+            --accent-foreground: hsl(0 0% 98%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(0 0% 98%);
+            --border: hsl(0 0% 16%);
+            --input: hsl(0 0% 16%);
+            --ring: hsl(51 100% 50%);
+            --radius: 0.75rem;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+        }
+        
+        .gradient-button {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        }
+        
+        .gradient-button:hover {
+            background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.1);
+        }
+        
+        .admin-active {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground min-h-screen">
+    <!-- Navigation Header -->
+    <header class="bg-card border-b border-border">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold text-primary">BlogCMS</h1>
+                    <span class="text-muted-foreground text-sm">Melbet Inspired</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#home" class="text-foreground hover:text-primary transition-colors" data-tab="home">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="#admin" class="text-foreground hover:text-primary transition-colors" data-tab="admin">
+                        <i class="fas fa-cog mr-2"></i>Admin
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page Section -->
+    <div id="home-section" class="tab-content">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-brand-black via-gray-900 to-brand-black py-20">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    <span class="text-primary">Modern</span> Blog Platform
+                </h1>
+                <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Discover the latest articles, insights, and stories from our community of writers
+                </p>
+                <button class="gradient-button text-brand-black font-semibold px-8 py-4 rounded-lg hover:shadow-lg transition-all">
+                    Explore Articles
+                </button>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-16 bg-card">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6">
+                        <div class="text-4xl font-bold text-primary mb-2" data-mock="true">152</div>
+                        <div class="text-muted-foreground">Published Articles</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-4xl font-bold text-secondary mb-2" data-mock="true">48K</div>
+                        <div class="text-muted-foreground">Monthly Readers</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-4xl font-bold text-accent mb-2" data-mock="true">12</div>
+                        <div class="text-muted-foreground">Contributing Authors</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Articles Section -->
+        <section class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">Latest Articles</h2>
+                    <p class="text-muted-foreground text-lg">Stay updated with our newest content</p>
+                </div>
+
+                <!-- @MAP: posts.map(post => ( -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Featured Article -->
+                    <div class="lg:col-span-2 bg-card rounded-lg overflow-hidden card-hover">
+                        <!-- A vibrant cityscape at night with neon lights and modern architecture -->
+                        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                             alt="Modern cityscape with neon lights" 
+                             class="w-full h-64 object-cover" data-mock-image="true" />
+                        <div class="p-6">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <span class="bg-primary text-brand-black px-3 py-1 rounded-full text-sm font-medium">Featured</span>
+                                <span class="text-muted-foreground text-sm" data-bind="post.createdAt">March 15, 2024</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3" data-bind="post.title" data-mock="true">
+                                The Future of Web Development: Trends to Watch in 2024
+                            </h3>
+                            <p class="text-muted-foreground mb-4" data-bind="post.content" data-mock="true">
+                                Explore the cutting-edge technologies and frameworks that are shaping the future of web development. From AI integration to new JavaScript frameworks...
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-user text-primary"></i>
+                                    <span class="text-sm text-muted-foreground" data-mock="true">John Doe</span>
+                                </div>
+                                <button class="text-primary hover:text-primary/80 font-medium">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Regular Articles -->
+                    <div class="space-y-8">
+                        <article class="bg-card rounded-lg overflow-hidden card-hover">
+                            <!-- A modern office workspace with multiple monitors and coding setup -->
+                            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=200" 
+                                 alt="Modern coding workspace setup" 
+                                 class="w-full h-32 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <span class="text-muted-foreground text-sm" data-bind="post.createdAt" data-mock="true">March 12, 2024</span>
+                                <h4 class="text-lg font-semibold mb-2" data-bind="post.title" data-mock="true">
+                                    Mastering React Hooks: A Complete Guide
+                                </h4>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="post.content" data-mock="true">
+                                    Learn how to effectively use React Hooks to build powerful and maintainable applications...
+                                </p>
+                                <button class="text-primary hover:text-primary/80 text-sm font-medium">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </article>
+
+                        <article class="bg-card rounded-lg overflow-hidden card-hover">
+                            <!-- A sleek database visualization with glowing connections and data flows -->
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=200" 
+                                 alt="Database visualization with data connections" 
+                                 class="w-full h-32 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <span class="text-muted-foreground text-sm" data-bind="post.createdAt" data-mock="true">March 10, 2024</span>
+                                <h4 class="text-lg font-semibold mb-2" data-bind="post.title" data-mock="true">
+                                    Database Optimization Techniques
+                                </h4>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="post.content" data-mock="true">
+                                    Discover advanced strategies to optimize your database performance and scalability...
+                                </p>
+                                <button class="text-primary hover:text-primary/80 text-sm font-medium">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button class="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-lg font-semibold transition-all">
+                        Load More Articles
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-16 bg-gradient-to-r from-primary/10 to-secondary/10">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+                <p class="text-muted-foreground mb-8 max-w-xl mx-auto">
+                    Subscribe to our newsletter and never miss the latest articles and insights
+                </p>
+                <div class="max-w-md mx-auto flex space-x-4">
+                    <input type="email" placeholder="Enter your email" 
+                           class="flex-1 bg-input border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
+                    <button class="gradient-button text-brand-black font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition-all">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Admin Section -->
+    <div id="admin-section" class="tab-content hidden">
+        <div class="container mx-auto px-4 py-8">
+            <!-- Admin Header -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold mb-2">Admin Dashboard</h1>
+                <p class="text-muted-foreground">Manage your blog content and posts</p>
+            </div>
+
+            <!-- Admin Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-card p-6 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">Total Posts</p>
+                            <p class="text-2xl font-bold text-primary" data-mock="true">152</p>
+                        </div>
+                        <i class="fas fa-file-alt text-primary text-2xl"></i>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">Published</p>
+                            <p class="text-2xl font-bold text-secondary" data-mock="true">143</p>
+                        </div>
+                        <i class="fas fa-check-circle text-secondary text-2xl"></i>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">Drafts</p>
+                            <p class="text-2xl font-bold text-muted-foreground" data-mock="true">9</p>
+                        </div>
+                        <i class="fas fa-edit text-muted-foreground text-2xl"></i>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">Views Today</p>
+                            <p class="text-2xl font-bold text-accent" data-mock="true">1.2K</p>
+                        </div>
+                        <i class="fas fa-eye text-accent text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Create Post Form -->
+                <!-- @COMPONENT: CreatePostForm -->
+                <div class="lg:col-span-2">
+                    <div class="bg-card p-6 rounded-lg">
+                        <h2 class="text-2xl font-bold mb-6">Create New Post</h2>
+                        
+                        <form class="space-y-6" data-implementation="Handle form submission with API calls">
+                            <!-- Title Field -->
+                            <div>
+                                <label for="post-title" class="block text-sm font-medium mb-2">Title</label>
+                                <input type="text" id="post-title" name="title" 
+                                       class="w-full bg-input border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" 
+                                       placeholder="Enter post title..." />
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div>
+                                <label for="post-image" class="block text-sm font-medium mb-2">Featured Image</label>
+                                <div class="border-2 border-dashed border-border rounded-lg p-6 text-center bg-muted/20">
+                                    <div id="upload-area" class="space-y-4">
+                                        <i class="fas fa-cloud-upload-alt text-4xl text-muted-foreground"></i>
+                                        <div>
+                                            <p class="text-muted-foreground">Drag and drop an image here, or</p>
+                                            <button type="button" class="text-primary hover:text-primary/80 font-medium">
+                                                browse files
+                                            </button>
+                                        </div>
+                                        <input type="file" id="post-image" name="image" accept="image/*" class="hidden" />
+                                    </div>
+                                    
+                                    <!-- Image Preview (hidden by default) -->
+                                    <div id="image-preview" class="hidden">
+                                        <img id="preview-img" src="" alt="Preview" class="max-w-full h-48 object-cover mx-auto rounded-lg" />
+                                        <button type="button" id="remove-image" class="mt-2 text-destructive hover:text-destructive/80">
+                                            <i class="fas fa-times mr-1"></i>Remove Image
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Content Field -->
+                            <div>
+                                <label for="post-content" class="block text-sm font-medium mb-2">Content</label>
+                                <textarea id="post-content" name="content" rows="8" 
+                                          class="w-full bg-input border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-vertical" 
+                                          placeholder="Write your post content..."></textarea>
+                            </div>
+
+                            <!-- Published Checkbox -->
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" id="published" name="published" 
+                                       class="w-4 h-4 text-primary bg-input border-border rounded focus:ring-ring focus:ring-2" />
+                                <label for="published" class="text-sm font-medium">Publish immediately</label>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex space-x-4">
+                                <button type="submit" data-event="click:handleSubmit" 
+                                        class="gradient-button text-brand-black font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition-all">
+                                    <i class="fas fa-save mr-2"></i>Publish Post
+                                </button>
+                                <button type="button" 
+                                        class="bg-muted text-muted-foreground hover:bg-muted/80 px-6 py-3 rounded-lg font-semibold transition-all">
+                                    <i class="fas fa-file mr-2"></i>Save Draft
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: CreatePostForm -->
+
+                <!-- Recent Posts Management -->
+                <!-- @COMPONENT: PostsManagement -->
+                <div class="space-y-6">
+                    <div class="bg-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Recent Posts</h3>
+                        
+                        <!-- @MAP: recentPosts.map(post => ( -->
+                        <div class="space-y-4">
+                            <div class="border-b border-border pb-4">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-sm mb-1" data-bind="post.title" data-mock="true">
+                                            React Hooks Complete Guide
+                                        </h4>
+                                        <p class="text-muted-foreground text-xs mb-2" data-bind="post.createdAt" data-mock="true">
+                                            March 12, 2024
+                                        </p>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs" data-bind="post.published" data-mock="true">
+                                                Published
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-primary hover:text-primary/80" data-event="click:editPost">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-destructive hover:text-destructive/80" data-event="click:deletePost">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-b border-border pb-4">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-sm mb-1" data-bind="post.title" data-mock="true">
+                                            Database Optimization
+                                        </h4>
+                                        <p class="text-muted-foreground text-xs mb-2" data-bind="post.createdAt" data-mock="true">
+                                            March 10, 2024
+                                        </p>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="bg-muted text-muted-foreground px-2 py-1 rounded text-xs" data-bind="post.published" data-mock="true">
+                                                Draft
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-primary hover:text-primary/80" data-event="click:editPost">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-destructive hover:text-destructive/80" data-event="click:deletePost">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-b border-border pb-4">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-sm mb-1" data-bind="post.title" data-mock="true">
+                                            Future of Web Development
+                                        </h4>
+                                        <p class="text-muted-foreground text-xs mb-2" data-bind="post.createdAt" data-mock="true">
+                                            March 8, 2024
+                                        </p>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs" data-bind="post.published" data-mock="true">
+                                                Published
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-primary hover:text-primary/80" data-event="click:editPost">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-destructive hover:text-destructive/80" data-event="click:deletePost">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+
+                        <button class="w-full mt-4 text-primary hover:text-primary/80 text-sm font-medium">
+                            View All Posts <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="bg-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button class="w-full admin-active text-accent-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition-all">
+                                <i class="fas fa-plus mr-2"></i>New Post
+                            </button>
+                            <button class="w-full bg-muted text-muted-foreground hover:bg-muted/80 py-3 rounded-lg font-semibold transition-all">
+                                <i class="fas fa-images mr-2"></i>Media Library
+                            </button>
+                            <button class="w-full bg-muted text-muted-foreground hover:bg-muted/80 py-3 rounded-lg font-semibold transition-all">
+                                <i class="fas fa-chart-bar mr-2"></i>Analytics
+                            </button>
+                            <button class="w-full bg-muted text-muted-foreground hover:bg-muted/80 py-3 rounded-lg font-semibold transition-all">
+                                <i class="fas fa-cog mr-2"></i>Settings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: PostsManagement -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-card border-t border-border py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-primary">BlogCMS</h3>
+                    <p class="text-muted-foreground">Modern blog platform with Melbet-inspired design for content creators and developers.</p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Quick Links</h4>
+                    <ul class="space-y-2 text-muted-foreground">
+                        <li><a href="#" class="hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Categories</h4>
+                    <ul class="space-y-2 text-muted-foreground">
+                        <li><a href="#" class="hover:text-primary transition-colors">Web Development</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Technology</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Design</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Programming</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-semibold">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
+                <p>&copy; 2024 BlogCMS. All rights reserved. Built with Next.js, TailwindCSS, Prisma & Supabase.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Navigation
+        (function() {
+            const tabLinks = document.querySelectorAll('[data-tab]');
+            const homeSection = document.getElementById('home-section');
+            const adminSection = document.getElementById('admin-section');
+
+            function showTab(tabName) {
+                if (tabName === 'admin') {
+                    homeSection.classList.add('hidden');
+                    adminSection.classList.remove('hidden');
+                } else {
+                    homeSection.classList.remove('hidden');
+                    adminSection.classList.add('hidden');
+                }
+
+                // Update active states
+                tabLinks.forEach(link => {
+                    if (link.getAttribute('data-tab') === tabName) {
+                        link.classList.add('text-primary');
+                        link.classList.remove('text-foreground');
+                    } else {
+                        link.classList.remove('text-primary');
+                        link.classList.add('text-foreground');
+                    }
+                });
+            }
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabName = link.getAttribute('data-tab');
+                    showTab(tabName);
+                });
+            });
+
+            // Handle hash navigation
+            function handleHashChange() {
+                const hash = window.location.hash.substring(1);
+                if (hash === 'admin') {
+                    showTab('admin');
+                } else {
+                    showTab('home');
+                }
+            }
+
+            window.addEventListener('hashchange', handleHashChange);
+            handleHashChange(); // Initial load
+        })();
+
+        // Image Upload Preview
+        (function() {
+            const fileInput = document.getElementById('post-image');
+            const uploadArea = document.getElementById('upload-area');
+            const imagePreview = document.getElementById('image-preview');
+            const previewImg = document.getElementById('preview-img');
+            const removeImageBtn = document.getElementById('remove-image');
+
+            function showImagePreview(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    uploadArea.classList.add('hidden');
+                    imagePreview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function hideImagePreview() {
+                uploadArea.classList.remove('hidden');
+                imagePreview.classList.add('hidden');
+                previewImg.src = '';
+                fileInput.value = '';
+            }
+
+            // File input change
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    showImagePreview(file);
+                }
+            });
+
+            // Remove image button
+            removeImageBtn.addEventListener('click', hideImagePreview);
+
+            // Click to browse
+            document.querySelector('[type="button"]').addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            // Drag and drop functionality
+            const dropArea = uploadArea;
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight(e) {
+                dropArea.classList.add('border-primary', 'bg-primary/5');
+            }
+
+            function unhighlight(e) {
+                dropArea.classList.remove('border-primary', 'bg-primary/5');
+            }
+
+            dropArea.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (file.type.startsWith('image/')) {
+                        fileInput.files = files;
+                        showImagePreview(file);
+                    }
+                }
+            }
+        })();
+
+        // Form Submission
+        (function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // TODO: Implement form submission logic
+                // - Validate form data
+                // - Upload image to Supabase Storage
+                // - Create post via API
+                // - Show success/error messages
+                // - Reset form on success
+                
+                // Simulate loading state
+                const submitBtn = form.querySelector('[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Publishing...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    // Show success message or handle errors
+                    alert('Post published successfully! (This is a mockup)');
+                }, 2000);
+            });
+        })();
+
+        // Mock interactive features
+        document.addEventListener('click', function(e) {
+            // Handle edit/delete post actions
+            if (e.target.closest('[data-event*="editPost"]')) {
+                alert('Edit functionality would be implemented here');
+            }
+            if (e.target.closest('[data-event*="deletePost"]')) {
+                if (confirm('Are you sure you want to delete this post?')) {
+                    alert('Delete functionality would be implemented here');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
