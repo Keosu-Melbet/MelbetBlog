@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: melbetblog-web
+    env: node
+    buildCommand: "npm install && npx prisma db push && npm run build"
+    startCommand: "npm start"
+    envVars:
+      - key: DATABASE_URL
+        value: "postgresql://<user>:<pass>@<host>:5432/postgres"
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: "https://<project>.supabase.co"
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        value: "<anon-key>"
