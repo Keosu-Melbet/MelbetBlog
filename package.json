@@ -1,5 +1,5 @@
 {
-  "name": "your-app-name",
+  "name": "vite-react-app",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "typescript": "^5.0.4",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
     "@vitejs/plugin-react": "^4.0.0"
   }
 }
