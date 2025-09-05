@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: your-app-name
+    name: vite-react-ts-app
     env: node
     buildCommand: npm install && npm run build
     startCommand: npm run preview
